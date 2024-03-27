@@ -1,14 +1,3 @@
-
-function handleProductClick(prodotto) {
-
-    Carrello.aggiungi(prodotto)
-    qtaElement.textContent = Carrello.qta();
-    totalElement.textContent = Carrello.totale();
-
-    updateCartTable()
-
-}
-
 function addRow(pSku, pProdotto, pPrezzo, pQta) {
     const row = document.createElement('tr');
     const elSku = document.createElement('td');
@@ -81,6 +70,16 @@ function updateCartTable() {
     })
 }
 
+function handleProductClick(prodotto) {
+
+    Carrello.aggiungi(prodotto)
+    qtaElement.textContent = Carrello.qta();
+    totalElement.textContent = Carrello.totale();
+
+    updateCartTable()
+    updateProductsList()
+}
+
 // MAIN //
 const prodotti = [
     {
@@ -127,6 +126,8 @@ const prodotti = [
     }
 ];
 
+
+
 const updateProductsList = (cercato) => {
     productsList.innerHTML = ''
 
@@ -137,6 +138,10 @@ const updateProductsList = (cercato) => {
 
             // listItem.innerHTML = item.nome + ' <b>' + item.prezzo + '€</b>';
             listItem.innerHTML = `${item.nome}<b>${item.prezzo}€</b>`;
+
+            if (Carrello.oggetti().findIndex((i) => item.sku === i.sku) >= 0) {
+                listItem.className = 'added'
+            }
 
             listItem.addEventListener(
                 'click',
@@ -176,8 +181,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateProductsList()
 
+
     searchField.addEventListener(
-        'change',
+        'keyup',
         (event) => {
             const valoreCercato = event.target.value
             updateProductsList(valoreCercato)

@@ -20,6 +20,10 @@ th {
     padding: 3px 5 px;
 }
 
+li.added {
+    background-color: lightgreen;
+}
+
 #items {
     list-style: none;
     padding: 0;
