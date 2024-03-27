@@ -85,17 +85,67 @@ function updateCartTable() {
 const prodotti = [
     {
         sku: 'GAME01',
-        nome: 'GTA',
+        nome: 'Grand Theft Auto',
         prezzo: 70,
         magazzino: 100
     },
     {
         sku: 'GAME02',
-        nome: 'CoD',
+        nome: 'Call of Duty',
+        prezzo: 26,
+        magazzino: 50
+    },
+    {
+        sku: 'GAME03',
+        nome: 'Fifa 23',
+        prezzo: 26,
+        magazzino: 50
+    },
+    {
+        sku: 'GAME04',
+        nome: 'Ghost and Goblins',
+        prezzo: 26,
+        magazzino: 50
+    },
+    {
+        sku: 'GAME05',
+        nome: 'Xonotic',
+        prezzo: 26,
+        magazzino: 50
+    },
+    {
+        sku: 'GAME06',
+        nome: 'The Sims 4',
+        prezzo: 26,
+        magazzino: 50
+    },
+    {
+        sku: 'GAME07',
+        nome: 'Unreal Tournament 2004',
         prezzo: 26,
         magazzino: 50
     }
 ];
+
+const updateProductsList = (cercato) => {
+    productsList.innerHTML = ''
+
+    prodotti
+        .filter((p) => !cercato || p.nome.toLowerCase().indexOf(cercato.toLowerCase()) >= 0)
+        .forEach(function (item) {
+            const listItem = document.createElement('li');
+
+            // listItem.innerHTML = item.nome + ' <b>' + item.prezzo + '€</b>';
+            listItem.innerHTML = `${item.nome}<b>${item.prezzo}€</b>`;
+
+            listItem.addEventListener(
+                'click',
+                () => handleProductClick(item)
+            )
+
+            productsList.appendChild(listItem)
+        })
+}
 
 let qtaElement;
 let totalElement;
@@ -103,6 +153,8 @@ let totalElement;
 let productsList;
 
 let carrelloElement;
+
+let searchField;
 
 let qta = 0;
 const prezzo = 120;
@@ -113,20 +165,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     qtaElement = document.getElementById('qta')
     totalElement = document.getElementById('total')
-    
+
     productsList = document.getElementById('items')
-    
+
     carrelloElement = document.getElementById('carrello')
+
+    searchField = document.getElementById('cerca')
 
     Carrello = Cart();
 
-        prodotti.forEach(function (item) { // item è il parametro della funzione anonima che accetta foreach
-            const listItem = document.createElement('li')
-            listItem.textContent = item.nome
+    updateProductsList()
 
-            listItem.addEventListener('click',
-                () => handleProductClick(item))
-
-            productsList.appendChild(listItem)
+    searchField.addEventListener(
+        'change',
+        (event) => {
+            const valoreCercato = event.target.value
+            updateProductsList(valoreCercato)
         })
-    })
+})
