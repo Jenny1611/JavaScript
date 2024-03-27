@@ -1,36 +1,12 @@
-const prodotti = [
-    {
-        sku: 'GAME01',
-        nome: 'GTA',
-        prezzo: 70,
-        magazzino: 100
-    },
-    {
-        sku: 'GAME02',
-        nome: 'CoD',
-        prezzo: 26,
-        magazzino: 50
-    }
-];
-
-const qtaElement = document.getElementById('qta')
-const totalElement = document.getElementById('total')
-
-const productsList = document.getElementById('items')
-
-const carrelloElement = document.getElementById('carrello')
-
-let qta = 0;
-const prezzo = 120;
 
 function handleProductClick(prodotto) {
 
     Carrello.aggiungi(prodotto)
     qtaElement.textContent = Carrello.qta();
     totalElement.textContent = Carrello.totale();
-    
+
     updateCartTable()
-    
+
 }
 
 function addRow(pSku, pProdotto, pPrezzo, pQta) {
@@ -98,8 +74,6 @@ const Cart = () => {
     }
 }
 
-const Carrello = Cart();
-
 function updateCartTable() {
     carrelloElement.innerHTML = '';
     Carrello.oggetti().forEach(function (item) {
@@ -107,35 +81,52 @@ function updateCartTable() {
     })
 }
 
-prodotti.forEach(function (item) { // item è il parametro della funzione anonima che accetta foreach
-    const listItem = document.createElement('li')
-    listItem.textContent = item.nome
+// MAIN //
+const prodotti = [
+    {
+        sku: 'GAME01',
+        nome: 'GTA',
+        prezzo: 70,
+        magazzino: 100
+    },
+    {
+        sku: 'GAME02',
+        nome: 'CoD',
+        prezzo: 26,
+        magazzino: 50
+    }
+];
 
-    listItem.addEventListener('click',
-        () => handleProductClick(item))
+let qtaElement;
+let totalElement;
 
-    productsList.appendChild(listItem)
-})
+let productsList;
 
-
-/*
-const items = document.querySelectorAll('#items li')
-
-const itemsArray = Array.from(items)
+let carrelloElement;
 
 let qta = 0;
 const prezzo = 120;
+let Carrello;
 
-qtaElement.textContent = qta;
-totalElement.textContent = qta * prezzo;
+document.addEventListener('DOMContentLoaded', () => {
+    console.log(document.getElementById('carrello'))
 
-function handleProductClick() {
-    qta += 1;
-    qtaElement.textContent = qta;
-    totalElement.textContent = qta * prezzo;
-}
+    qtaElement = document.getElementById('qta')
+    totalElement = document.getElementById('total')
+    
+    productsList = document.getElementById('items')
+    
+    carrelloElement = document.getElementById('carrello')
 
-itemsArray.forEach(function (item) {
-    item.addEventListener('click',
-        handleProductClick)
-})*/
+    Carrello = Cart();
+
+        prodotti.forEach(function (item) { // item è il parametro della funzione anonima che accetta foreach
+            const listItem = document.createElement('li')
+            listItem.textContent = item.nome
+
+            listItem.addEventListener('click',
+                () => handleProductClick(item))
+
+            productsList.appendChild(listItem)
+        })
+    })
