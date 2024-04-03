@@ -26,7 +26,8 @@ li.added {
 
 #items {
     list-style: none;
-    padding: 0;
+    padding: 10px;
+    border: 1px solid #ccc;
 }
 
 #items li {
