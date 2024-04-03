@@ -166,7 +166,6 @@ const prezzo = 120;
 let Carrello;
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log(document.getElementById('carrello'))
 
     qtaElement = document.getElementById('qta')
     totalElement = document.getElementById('total')
@@ -183,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     searchField.addEventListener(
-        'keyup',
+        'input',
         (event) => {
             const valoreCercato = event.target.value
             updateProductsList(valoreCercato)
