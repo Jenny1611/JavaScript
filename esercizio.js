@@ -33,16 +33,22 @@ Espone:
 */
 
 const Casa = (indirizzo, numeroPorte, mq) => {
-    let riscaldamento = false
+    let riscaldamentoAcceso = false
 
     return {
         indirizzo,
         numeroPorte,
         mq,
-        accendiRiscaldamento: () => riscaldamento = true,
-        spegniRiscaldamento: () => riscaldamento = false,
-        switchaRiscaldamento: () => riscaldamento === false ? riscaldamento = true : riscaldamento = false,
-        statoRiscaldamento: () => riscaldamento === false ? 'spento' : 'acceso'
+        accendiRiscaldamento: () => {
+            riscaldamentoAcceso = true
+        },
+        spegniRiscaldamento: () => {
+            riscaldamentoAcceso = false
+        },
+        switchaRiscaldamento: () => {
+            riscaldamentoAcceso != riscaldamentoAcceso
+        },
+        statoRiscaldamento: () => riscaldamentoAcceso ? 'acceso' : 'spento'
     }
 }
 
