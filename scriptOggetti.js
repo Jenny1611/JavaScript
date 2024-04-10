@@ -9,7 +9,7 @@ const FnAutomobili = (ruote, nome, alimentazione, id, passeggeri) => {
         incrementaPass: () => {
             passeggeri += 1
         },
-        decrementaPass: () => passeggeri > 0 ? passeggeri -= 1 : passeggeri
+        decrementaPass: () => passeggeri > 0 ? --passeggeri : passeggeri
     }
 }
 
@@ -36,9 +36,11 @@ const FnConcessionaria = () => {
 
 const Concessionaria = FnConcessionaria()
 
+/*
 console.log(Concessionaria.numeroMezzi())
 console.log(Concessionaria.aggiungiMezzo(auto1))
 console.log(Concessionaria.aggiungiMezzo(auto2))
 console.log(Concessionaria.esisteMezzo('FP01'))
 console.log(Concessionaria.esisteMezzo('FP02'))
 console.log(Concessionaria.esisteMezzo('SL01'))
+*/
