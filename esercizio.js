@@ -46,7 +46,7 @@ const Casa = (indirizzo, numeroPorte, mq) => {
     }
 }
 
-const casa1 = Casa('Via Armenteressa 27/b', 2, 100)
+const casa1 = Casa('Via Ciao 27/b', 2, 100)
 
 /*
 Esercizio 3
