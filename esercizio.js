@@ -15,8 +15,6 @@ function sommaNumeri(numero) {
     return somma
 }
 
-console.log(sommaNumeri(5))
-
 /*
 Esercizio 2
 Scrivere una funzione per generare un oggetto casa.
@@ -66,15 +64,44 @@ Espone:
 */
 
 const Inquilino = (nome, annoDiNascita) => {
-    const data = new Date()
-    const annoCorrente = data.getFullYear()
 
     return {
+        nome,
+        annoDiNascita,
         saluta: () => {
-            let anni = annoCorrente - annoDiNascita
-            console.log('Ciao sono ' + nome + ', ho ' + anni + ' anni')
+            let anni = (new Date()).getFullYear() - annoDiNascita
+            // return 'Ciao sono ' + nome + ', ho ' + anni + ' anni'
+            return `Ciao sono ${nome}, ho ${anni} anni`
         }
     }
 }
 
 const inquilino1 = Inquilino('Giulio', 2002)
+
+/*
+Esercizio 4
+Aggiungere a casa1, senza modificare la funzione FnCasa, i metodi:
+ - metodo aggiungiInquilino(inq)
+ - metodo elencoInquilini()
+ - metodo rimuovi inquilino(nomeInquilino)
+ */
+
+ casa1.inquilini = []
+
+ casa1.elencoInquilini = function() { // non si può usare la arrow function perché perde il 'this'
+    return this.inquilini // this per accedere alle caratteristiche di sè stesso
+ }
+
+ casa1.aggiungiInquilino = function(inq) {
+    this.inquilini.push(inq)
+ }
+
+ casa1.rimuoviInquilinoInsensitive = function(nomeInq) {
+    const idx = this.inquilini.findIndex((inq) => {
+        return inq.nome.toLowerCase() === nomeInq.toLowerCase()
+    }) 
+
+    if (idx >= 0) {
+        this.inquilini.splice(idx, 1)
+    }
+ }
