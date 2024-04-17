@@ -8,34 +8,70 @@
 </head>
 
 <body>
-    <div id="tabella">
-        <div class="riga">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+    <section>
+        <div id="tabella">
+            <div class="riga">
+                <div id="0"></div>
+                <div id="1"></div>
+                <div id="2"></div>
+            </div>
 
-        <div class="riga">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+            <div class="riga">
+                <div id="3"></div>
+                <div id="4"></div>
+                <div id="5"></div>
+            </div>
 
-        <div class="riga">
-            <div></div>
-            <div></div>
-            <div></div>
+            <div class="riga">
+                <div id="6"></div>
+                <div id="7"></div>
+                <div id="8"></div>
+            </div>
         </div>
-    </div>
+    <button onclick="resetBoard()">Reset</button>
+    </section>
+
+    <section>
+        <h3>Risultati</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Player1</th>
+                    <th>Player2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="counter-1">0</td>
+                    <td id="counter-2">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
 
 
     <style>
+        body{
+            display: flex;
+            gap: 2rem;
+        }
+
+        td, th {
+            border: 1px solid #ccc;
+            text-align: center;
+            padding: 5px;
+        }
 
         .player1 {
-            background-color: green;
+            background-color: blueviolet;
         }
 
         .player2 {
+            background-color: pink;
+        }
+
+        .win {
             background-color: red;
         }
 
