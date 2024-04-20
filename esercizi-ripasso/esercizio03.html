@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 03</title>
+</head>
+
+<body>
+    <h3>Carta, Forbici, Sasso</h3>
+    <p>Crea due colonne con ognuna 3 bottoni per le tre possibili scelte</p>
+    <p>Quando viene selezionata una scelta sotto i bottoni indica qual'è la scelta per quel giocatore</p>
+    <p>Quando tutti e due i giocatori hanno fatto una scelta indica chi ha vinto</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Giocatore 1</th>
+                <td></td>
+                <th>Giocatore 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><button class="giocatore1">SASSO</button></td>
+                <td></td>
+                <td><button class="giocatore2">SASSO</button></td>
+            </tr>
+            <tr>
+                <td><button class="giocatore1">CARTA</button></td>
+                <td></td>
+                <td><button class="giocatore2">CARTA</button></td>
+            </tr>
+            <tr>
+                <td><button class="giocatore1">FORBICE</button></td>
+                <td></td>
+                <td><button class="giocatore2">FORBICE</button></td>
+            </tr>
+            <tr>
+                <td id="giocatore1"></td>
+                <th id="risultato"></th>
+                <td id="giocatore2"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const bottoni = document.querySelectorAll('button')
+        const giocatore1 = document.getElementById('giocatore1')
+        const giocatore2 = document.getElementById('giocatore2')
+        const risultato = document.getElementById('risultato')
+
+        let playing = true
+        let board = [0, 0]
+
+        // SASSO = 1, CARTA = 2, FORBICE = 3, NIENTE = 0
+
+        const winsGiocatore1 = [[1, 3], [2, 1], [3, 2]]
+        const winsGiocatore2 = [[1, 2], [2, 3], [3, 1]]
+
+        if (playing) {
+            bottoni.forEach((button) => {
+                button.addEventListener('click', (event) => {
+                    if (event.target.className === 'giocatore1') {
+                        if (board[0] === 0) {
+                            giocatore1.innerText = 'Cliccato ' + event.target.innerText
+                            if (event.target.innerText === 'SASSO') {
+                                board[0] = 1
+                            } else if (event.target.innerText === 'CARTA') {
+                                board[0] = 2
+                            } else {
+                                board[0] = 3
+                            }
+                        }
+                    } else {
+                        if (board[0] !== 0 && board[1] === 0) {
+                            giocatore2.innerText = 'Cliccato ' + event.target.innerText
+                            if (event.target.innerText === 'SASSO') {
+                                board[1] = 1
+                            } else if (event.target.innerText === 'CARTA') {
+                                board[1] = 2
+                            } else {
+                                board[1] = 3
+                            }
+                        checkWinner()
+                        }
+                    }
+                })
+            })
+        }
+
+        function checkWinner() {
+            const winningState1 = winsGiocatore1.find(function (sitWin) {
+                const stato1 = sitWin[0];
+                const stato2 = sitWin[1];
+
+                const valoreAlloStato1 = board[0];
+                const valoreAlloStato2 = board[1];
+
+                if (valoreAlloStato1 === sitWin[0] && valoreAlloStato2 === sitWin[1]) {
+                    playing = 0
+                    risultato.innerText = 'Vince giocatore 1'
+                }
+
+                return valoreAlloStato1 === sitWin[0] && valoreAlloStato2 === sitWin[1] && valoreAlloStato1 != 0
+
+            })
+
+            const winningState2 = winsGiocatore2.find(function (sitWin) {
+                const stato1 = sitWin[0];
+                const stato2 = sitWin[1];
+
+                const valoreAlloStato1 = board[0];
+                const valoreAlloStato2 = board[1];
+
+                if (valoreAlloStato1 === sitWin[0] && valoreAlloStato2 === sitWin[1]) {
+                    playing = false
+                    risultato.innerText = 'Vince giocatore 2'
+                }
+
+                return valoreAlloStato1 === sitWin[0] && valoreAlloStato2 === sitWin[1] && valoreAlloStato1 != 0
+            })
+
+            if (winningState1 === undefined && winningState2 === undefined) {
+                playing = false
+                risultato.innerText = 'Pareggio'
+            }
+        }
+    </script>
+</body>
+
+</html>

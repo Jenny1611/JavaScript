@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 01</title>
+</head>
+
+<body>
+    <h1>Calcola il fattoriale</h1>
+    <p>Il fattoriale di un numero si trova moltiplicando tutti i numeri naturali che lo precedono (escluso lo zero), con
+        esso incluso. Ad esempio, il "4!" darà come risultato "4 x 3 x 2 x 1 = 24" ed il "9!" è uguale a "9 x 8 x 7 x 6
+        x 5 x 4 x 3 x 2 x 1 = 362.880".</p>
+
+    <p>Creare una form che accetta in input un numero e al click su un bottone visualizza il fattoriale di quel numero
+    </p>
+    <form id="modulo">
+        <input type="number" id="numero">
+        <input type="submit" value="Calcola">
+    </form>
+    <div id="risultato"></div>
+
+    <script>
+        const modulo = document.getElementById('modulo') // cerca nel documento un elemento con id modulo (form)
+        const numero = document.getElementById('numero') // cerca nel documento un elemento con id numero (submit)
+        const risultato = document.getElementById('risultato') // cerca nel documento un elemento con id risultato (div)
+
+        modulo.addEventListener('submit', (event) => { // aggiunge un listener di eventi di tipo submit al form
+            event.preventDefault() // ferma l'invio del modulo
+            console.log('submit', parseInt(numero.value)) // fa un console log del valore dell'input
+
+            let result = parseInt(numero.value); // fa il casting del valore dell'input da stringa a intero
+
+            for(let i = parseInt(numero.value) - 1; i > 0; i--) { /* con il ciclo for inizializza la variabile i con il
+                velore dell'input -1 perché result parte già dal numero di partenza, finché i arriva a 1, e ad ogni ciclo
+                decrementa la variabile i di 1 */
+                result *= i; // moltiplica il valore di i con result e lo assegna a result
+            }
+
+            risultato.innerText = result; // modifica il contenuto del testo con il risultato calcolato
+        })
+
+    </script>
+</body>
+
+</html>
